@@ -84,11 +84,19 @@ https://lafabrique.kisskissbankbank.com/tests-aquatiques-2c7c235727ee
 ## gitlab & heroku
 
 :one: pour tous ceux qui utilisaient GitHub / Heroku ... et qui ont décidé de migrer vers GitLab ... il n'y a pas d'intégration plug-and-play fournie par Môôôssieur Heroku (= heroku ne détecte pas les modifs du repo et récupère le code pour l'appliquer sur l'instance qui aura été correctement configurée pour faire ça :wink: )
+
 :two: Alors que heroku *récupérait* ce qu'il faut depuis la forge (GitHub) ... maintenant il faut trouver un moyen de dire à la forge (GitLab) de *pousser* vers heroku (de pourquoi ou parle de CI/C*D* ... le *D* étant pour *Deployment*) => il faut *déployer* sur heroku
+
 :three: pour faire ça ... il faut déjà commencer par *autoriser* la forge (GitLab) à *envoyer* des choses à Heroku
+
 :four: il faut donc récupérer *une clé API* dispo dans l'interface de heroku !
+
 :five: *tout ceci n'a d'intérêt que si les tests passent* (spéciale dédicace à @François D. et @Louis :wink::hearts:) ... après seulement on va chercher à déployer sur heroku ... et encore après à tweaker les runners pour des besoins spécifiques ou parce que c'est contre ta religion d'utiliser les ressources mises à ta disposition gratuitement par GitLab :smirk:
+
 :six: pour faire passer des tests grâce à GitLab ... baaah faut un fichier `.gitlab-ci.yml` qui grosso merdo fait la même chose qu'un docker compose (pour ceux à qui ça parle) = ça prépare une ou des machines (_virtuelles_ ... des containers en réalité :wink: ... vu que désormais les principaux CI utilisent docker) ... mais c'est toujours pas besoin de se prendre la tête avec docker ... GitLab fait ça pour vous ! (https://docs.gitlab.com/ee/ci/quick_start/)
+
 :seven: là vous luttez un peu avec les docs ... pour modifier / tweaker votre fichier `.gitlab-ci.yml` (ex.: rajouter rubocop / du coverage minimum :smirk: )
+
 :eight: *quand tout est vert* (= tous les tests passent) la partie CI est done ... on peut enfin attaquer la partie CD = envoyer vers les serveurs-ki-vont-bien ... heroku en l'espèce (vu le nombre de fois où je suis surpris par ça, je me dois de préciser: même si c'est top, *il n'y a pas que heroku dans la vie* ... et non tous les autres services ne fonctionnent pas de la même façon / ne s'intègrent pas à grands coups de git push heroku master & co)
+
 :nine: vu que tu te seras fais chier à lire les docs à l'étape :seven: tu sais désormais qu'on peut faire exécuter des scripts à des étapes spécifiques dans le fichier `.gitlab-ci.yml` ... soit tu fais le truc bourrin: un bon vieux push des familles vers l'adresse du repo qui correspond à ton instance heroku ... soit tu utilises des trucs comme `dpl` pour que ce soit plus _smooth_ (edited)
